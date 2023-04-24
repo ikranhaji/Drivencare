@@ -1,8 +1,7 @@
 # CarCar
 
 Team:
-
-* Person 1 - Which microservice?
+* Ikran Haji- Automobile sales
 * Jasmine Bagha - Automobile Services
 
 ## Design
