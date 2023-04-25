@@ -27,6 +27,7 @@ class SaleListEncoder(ModelEncoder):
         "price",
         "salesperson",
         "automobile",
+        "id"
     ]
     encoders = {"salesperson": SalepersonEncoder(), "customer": CustomerEncoder(), "automobile": AutomobileVOEncoder()}
 
@@ -147,8 +148,8 @@ def list_sales(request):
     else:
         content = json.loads(request.body)
         try:
-            id = content["salesperson"]
-            salesperson = Salesperson.objects.get(id=id)
+            salesperson_id = content["salesperson"]
+            salesperson = Salesperson.objects.get(id=salesperson_id)
             content["salesperson"] = salesperson
         except Salesperson.DoesNotExist:
             return JsonResponse(
@@ -156,8 +157,8 @@ def list_sales(request):
                 status=400,
             )
         try:
-            id = content["customer"]
-            customer = Customer.objects.get(id=id)
+            customer_id = content["customer"]
+            customer = Customer.objects.get(id=customer_id)
             content["customer"] = customer
         except Customer.DoesNotExist:
             return JsonResponse(
@@ -165,8 +166,8 @@ def list_sales(request):
                 status=400,
             )
         try:
-            vin = content["automobile"]
-            automobile = AutomobileVO.objects.get(vin=vin)
+            auto_vin = content["automobile"]
+            automobile = AutomobileVO.objects.get(vin=auto_vin)
             content["automobile"] = automobile
         except AutomobileVO.DoesNotExist:
             return JsonResponse(
