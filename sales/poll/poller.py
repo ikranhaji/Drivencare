@@ -9,18 +9,34 @@ sys.path.append("")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sales_project.settings")
 django.setup()
 
-# Import models from sales_rest, here.
-# from sales_rest.models import Something
+from sales_rest.models import AutomobileVO
 
-def poll():
+from sales_rest.models import AutomobileVO
+
+
+def get_vin():
+    response = requests.get("http://project-beta-inventory-api-1:8000/api/automobiles")
+    content = json.loads(response.content)
+    for auto in content["autos"]:
+        AutomobileVO.objects.update_or_create(
+            defaults={"vin": auto["vin"]},
+        )
+
+
+def poll(repeat=True):
     while True:
-        print('Sales poller polling for data')
+        print('Service poller polling for data')
         try:
-            # Write your polling logic, here
-            pass
+            get_vin()
         except Exception as e:
             print(e, file=sys.stderr)
-        time.sleep(60)
+        if (not repeat):
+            break
+        time.sleep(20)
+
+
+if __name__ == "__main__":
+    poll()
 
 
 if __name__ == "__main__":

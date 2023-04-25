@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import AutomobileVO
+
+@admin.register(AutomobileVO)
+class AutomobileVOAdmin(admin.ModelAdmin):
+    pass
