@@ -11,14 +11,14 @@ django.setup()
 
 from sales_rest.models import AutomobileVO
 
-from sales_rest.models import AutomobileVO
 
 
-def get_vin():
+def get_autombile():
     response = requests.get("http://project-beta-inventory-api-1:8000/api/automobiles")
     content = json.loads(response.content)
     for auto in content["autos"]:
         AutomobileVO.objects.update_or_create(
+            import_href=auto["href"],
             defaults={"vin": auto["vin"]},
         )
 
@@ -27,7 +27,7 @@ def poll(repeat=True):
     while True:
         print('Service poller polling for data')
         try:
-            get_vin()
+            get_autombile()
         except Exception as e:
             print(e, file=sys.stderr)
         if (not repeat):

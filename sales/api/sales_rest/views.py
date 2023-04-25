@@ -203,7 +203,7 @@ def show_sales(request, id):
 
         except Sale.DoesNotExist:
             response = JsonResponse(
-                {"message": "Sale does not exist"}
+                {"message": "Sale delete unknow id"}
             )
             response.status_code = 400
             return response
