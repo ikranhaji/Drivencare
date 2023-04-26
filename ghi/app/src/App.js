@@ -29,12 +29,18 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/technicians/new" element={<TechnicianForm />} />
-          <Route path="/technicians" element={<TechnicianList />} />
-          <Route path="/manufacturers" element={<ManufacturerList />} />
-          <Route path="/manufacturers/new" element={<ManufacturerForm />} />
-          <Route path="/appointments/new" element={<AppointmentForm />} />
-          <Route path="/appointments" element={<AppointmentList />} />
+          <Route path="technicians">
+            <Route path="new" element={<TechnicianForm />} />
+            <Route path='' element={<TechnicianList />} />
+          </Route>
+          <Route path="manufacturers">
+            <Route path='' element={<ManufacturerList />} />
+            <Route path="new" element={<ManufacturerForm />} />
+          </Route>
+          <Route path="appointments">
+            <Route path="new" element={<AppointmentForm />} />
+            <Route path='' element={<AppointmentList />} />
+          </Route>
           <Route path="/service" element={<ServiceHistory />} />
           <Route path="salespeople">
             <Route path='' element={<SalesPeopleList />} />
