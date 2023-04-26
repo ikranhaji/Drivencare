@@ -19,6 +19,7 @@ def get_autombile():
     for auto in content["autos"]:
         AutomobileVO.objects.update_or_create(
             import_href=auto["href"],
+            sold= auto["sold"],
             defaults={"vin": auto["vin"]},
         )
 
@@ -33,10 +34,6 @@ def poll(repeat=True):
         if (not repeat):
             break
         time.sleep(20)
-
-
-if __name__ == "__main__":
-    poll()
 
 
 if __name__ == "__main__":

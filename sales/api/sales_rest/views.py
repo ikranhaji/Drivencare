@@ -2,34 +2,9 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
-from common.json import ModelEncoder
-
 from .models import AutomobileVO,  Salesperson, Customer, Sale
+from .encoders import  SaleListEncoder, SalepersonEncoder, CustomerEncoder
 
-class AutomobileVOEncoder(ModelEncoder):
-    model = AutomobileVO
-    properties= ["import_href", "vin", "id"]
-
-class SalepersonEncoder(ModelEncoder):
-    model = Salesperson
-    properties = ["first_name", "last_name", "employee_id", "id"]
-
-
-class CustomerEncoder(ModelEncoder):
-    model = Customer
-    properties = ["first_name", "last_name", "address", "phone_number", "id"]
-
-
-class SaleListEncoder(ModelEncoder):
-    model = Sale
-    properties = [
-        "customer",
-        "price",
-        "salesperson",
-        "automobile",
-        "id"
-    ]
-    encoders = {"salesperson": SalepersonEncoder(), "customer": CustomerEncoder(), "automobile": AutomobileVOEncoder()}
 
 
 @require_http_methods(["GET", "POST"])
@@ -53,7 +28,7 @@ def list_salespeople(request):
             response = JsonResponse(
                 {"message": "Could not create salesperson"}
             )
-            response.status_code = 400
+            response.status_code = 404
             return response
 
 @require_http_methods(["DELETE", "GET"])
@@ -70,7 +45,7 @@ def show_salesperson(request, id):
             response = JsonResponse(
                 {"message": "Salesperson does not exist"}
             )
-            response.status_code = 400
+            response.status_code = 404
             return response
     elif request.method == "DELETE":
         try:
@@ -81,7 +56,7 @@ def show_salesperson(request, id):
             response = JsonResponse(
                 {"message": "Salesperson does not exist"}
             )
-            response.status_code = 400
+            response.status_code = 404
             return response
 
 
@@ -106,7 +81,7 @@ def list_customer(request):
             response = JsonResponse(
                 {"message": "Could not create customer"}
             )
-            response.status_code = 400
+            response.status_code = 404
             return response
 
 @require_http_methods(["DELETE", "GET"])
@@ -123,7 +98,7 @@ def show_customer(request, id):
             response = JsonResponse(
                 {"message": "Customer does not exist"}
             )
-            response.status_code = 400
+            response.status_code = 404
             return response
     elif request.method == "DELETE":
         try:
@@ -134,7 +109,7 @@ def show_customer(request, id):
             response = JsonResponse(
                 {"message": "Salesperson does not exist"}
             )
-            response.status_code = 400
+            response.status_code = 404
             return response
 
 @require_http_methods(["POST", "GET"])
@@ -147,39 +122,36 @@ def list_sales(request):
         )
     else:
         content = json.loads(request.body)
-        try:
+        auto_vin = content["automobile"]
+        automobile = AutomobileVO.objects.get(vin=auto_vin)
+        if automobile.sold is False:
+            content["automobile"] = automobile
+
             salesperson_id = content["salesperson"]
             salesperson = Salesperson.objects.get(id=salesperson_id)
             content["salesperson"] = salesperson
-        except Salesperson.DoesNotExist:
-            return JsonResponse(
-                {"message": "Invalid salesperson id"},
-                status=400,
-            )
-        try:
+
+
             customer_id = content["customer"]
             customer = Customer.objects.get(id=customer_id)
             content["customer"] = customer
-        except Customer.DoesNotExist:
+
+            automobile.sold =True
+            automobile.save()
+
+            sale = Sale.objects.create(**content)
             return JsonResponse(
-                {"message": "Customer does not exist"},
-                status=400,
+                                sale,
+                                encoder=SaleListEncoder,
+                                safe=False,
+                            )
+        else:
+            response = JsonResponse(
+                {"message": "Car does not exist"}
             )
-        try:
-            auto_vin = content["automobile"]
-            automobile = AutomobileVO.objects.get(vin=auto_vin)
-            content["automobile"] = automobile
-        except AutomobileVO.DoesNotExist:
-            return JsonResponse(
-                {"message": "Automobile does not exist"},
-                status=400,
-            )
-        sale = Sale.objects.create(**content)
-        return JsonResponse(
-                sale,
-                encoder=SaleListEncoder,
-                safe=False,
-            )
+            response.status_code = 404
+            return response
+
 @require_http_methods(["DELETE", "GET"])
 def show_sales(request, id):
     if request.method == "GET":
@@ -194,7 +166,7 @@ def show_sales(request, id):
             response = JsonResponse(
                 {"message": "Sale does not exist"}
             )
-            response.status_code = 400
+            response.status_code = 404
             return response
     elif request.method == "DELETE":
         try:
@@ -205,5 +177,5 @@ def show_sales(request, id):
             response = JsonResponse(
                 {"message": "Sale delete unknow id"}
             )
-            response.status_code = 400
+            response.status_code = 404
             return response
