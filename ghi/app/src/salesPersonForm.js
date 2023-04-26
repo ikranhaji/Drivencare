@@ -25,7 +25,7 @@ function SalesPersonForm() {
         data.first_name = firstName;
         data.last_name = lastName;
         data.employee_id = employeeId;
-        console.log(data)
+
 
 
 
@@ -43,7 +43,7 @@ function SalesPersonForm() {
 
         if (response.ok) {
             const newsalesperson = await response.json();
-            console.log(newsalesperson)
+
 
             setFirstName('');
             setLastName('')

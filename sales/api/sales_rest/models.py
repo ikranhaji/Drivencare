@@ -7,7 +7,7 @@ from django.urls import reverse
 
 class AutomobileVO(models.Model):
     vin = models.CharField(unique=True, max_length=200)
-    import_href = models.CharField(max_length=200)
+    import_href = models.CharField(unique= True, max_length=200)
     sold = models.BooleanField(default=False)
 
 

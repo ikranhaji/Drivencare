@@ -42,7 +42,7 @@ function VehicleModelForm() {
         data.name = ModelName;
         data.picture_url = pictureUrl;
         data.manufacturer_id = manufacturer;
-        console.log(data)
+
 
 
 
@@ -60,7 +60,7 @@ function VehicleModelForm() {
 
         if (response.ok) {
             const newModel = await response.json();
-            console.log(newModel)
+
 
             setModelName('');
             setpictureUrl('')

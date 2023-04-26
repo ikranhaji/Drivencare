@@ -48,7 +48,7 @@ function CarForm() {
         data.year = year;
         data.vin = vin
         data.model_id = modelID;
-        console.log(data)
+
 
 
 
@@ -66,7 +66,7 @@ function CarForm() {
 
         if (response.ok) {
             const newCar = await response.json();
-            console.log(newCar)
+
 
             setYear('');
             setYear('')
@@ -80,7 +80,7 @@ function CarForm() {
         <div className="row">
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
-                    <h1>Add New Customer</h1>
+                    <h1>Add New Car</h1>
                     <form onSubmit={handleSubmit} id="create-location-form">
                         <div className="form-floating mb-3">
                             <input onChange={handleColorChange} value={color} placeholder="Color" required type="text" name="color" id="color" className="form-control" />

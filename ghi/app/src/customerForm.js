@@ -31,7 +31,7 @@ function CustomerForm() {
         data.last_name = lastName;
         data.address = address
         data.phone_number = phoneNumber;
-        console.log(data)
+
 
 
 
@@ -49,7 +49,7 @@ function CustomerForm() {
 
         if (response.ok) {
             const newCustomer = await response.json();
-            console.log(newCustomer)
+
 
             setFirstName('');
             setLastName('')

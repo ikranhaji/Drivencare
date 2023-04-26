@@ -80,7 +80,7 @@ function NewSale() {
         data.price = price;
         data.salesperson = person;
         data.automobile = auto
-        console.log(data)
+
 
 
 
@@ -98,7 +98,7 @@ function NewSale() {
 
         if (response.ok) {
             const newsale = await response.json();
-            console.log(newsale)
+
 
             setAuto('');
             setPerson('')

@@ -43,8 +43,8 @@ function CarList() {
                                     <td>{auto.color}</td>
                                     <td>{auto.year}</td>
                                     <td>{auto.model.name}</td>
-                                    <td>{auto.manufacturers}</td>
-                                    <td>{auto.sold}</td>
+                                    <td>{auto.model.manufacturer.name}</td>
+                                    <td>{auto.sold ? "yes" : "no"}</td>
                                 </tr>
                             );
                         })}

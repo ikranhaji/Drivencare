@@ -19,8 +19,8 @@ def get_autombile():
     for auto in content["autos"]:
         AutomobileVO.objects.update_or_create(
             import_href=auto["href"],
-            sold= auto["sold"],
-            defaults={"vin": auto["vin"]},
+            vin = auto["vin"],
+            defaults={"sold": auto["sold"]},
         )
 
 
