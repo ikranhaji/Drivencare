@@ -13,6 +13,17 @@ The servicers microservice had three models:
 1. The AutomobileVO model-this model was created to allow for polling of data from the inventory application. The vin number was one of the main peices of data that was polled to allow for updated information to be passed on to the services application.
 2. Technician model-this model was created to allow for the creation, deletion, and list view of technicians
 3. Appointment model- this model was created to allow for the creation, deletion, and list view of appointments. This model also allowed for each appointment to have a status of created, finished or cancelled. This albility allowed for the frontend user to create appointments, see a list of all appointments and also mark is an appointment was finished or cancelled. The AutomobileVO was also integrated to deterimine if a specific customer was a VIP depending on their vehicle's licence plate number matching the intentory of car licence plate numbers.
+
+## Sales microservice
+There are four models that were used to create salespeople, customers, and sales.
+1. The Salesperson Model is being used in the views to create, list and delete salespeople
+2. The customer models is being used to create, list and delete customers
+3. The automobileVO model is grabbing automobile information from the inventory microservice using the poller in order to provide that information to sales microservice.
+4. The sales models has three foreignKey which grab infromation from the customer, salesperson and automobileVO model in order to be able to use that information to create sales since each sale needs to include a customer, salesperson, and car.
+
+
+
+## EndPoint Data
 Examples of data for each endpoint:
 1. First create a manufacturer-
 {
@@ -38,7 +49,7 @@ Examples of data for each endpoint:
   "employee_id": "123"
 }
 5. Then create an appointment (need to match a vin to an automobiel that was created, also need to use a created technician,
-inventory vehicle is set to false by default so when a car appointment is made with a specific vin we can check if that vin exists in automobiles list and create VIP customers)
+inventory vehicle is set to false by default so when a car appointment is made with a specific vin we can check if that vin exists in automobiles list and create VIP customers)-
 {
     "date": "2022-01-01",
     "time":"12:30",
