@@ -48,7 +48,7 @@ Examples of data for each endpoint:
   "last_name": "T",
   "employee_id": "123"
 }
-5. Then create an appointment (need to match a vin to an automobiel that was created, also need to use a created technician,
+5. Then create an appointment (need to match a vin to an automobiel that was created, also need to use a created technician with only the first name,
 inventory vehicle is set to false by default so when a car appointment is made with a specific vin we can check if that vin exists in automobiles list and create VIP customers)-
 {
     "date": "2022-01-01",
