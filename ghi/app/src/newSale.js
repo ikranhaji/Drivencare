@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 function NewSale() {
     const [cars, setCars] = useState([])
     const fetchData = async () => {
-        const url = 'http://localhost:8100/api/automobiles/';
+        const url = `http://localhost:8100/api/automobiles/`;
 
         const response = await fetch(url);
 
@@ -71,6 +71,7 @@ function NewSale() {
         const value = event.target.value;
         setPrice(value);
     }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
