@@ -22,6 +22,7 @@ import NewSale from './newSale';
 
 
 
+
 function App() {
   return (
     <BrowserRouter>

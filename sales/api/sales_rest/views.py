@@ -5,8 +5,6 @@ import json
 from .models import AutomobileVO,  Salesperson, Customer, Sale
 from .encoders import  SaleListEncoder, SalepersonEncoder, CustomerEncoder
 
-
-
 @require_http_methods(["GET", "POST"])
 def list_salespeople(request):
     if request.method == "GET":
@@ -107,7 +105,7 @@ def show_customer(request, id):
 
         except Customer.DoesNotExist:
             response = JsonResponse(
-                {"message": "Salesperson does not exist"}
+                {"message": "customer does not exist"}
             )
             response.status_code = 404
             return response
@@ -126,25 +124,33 @@ def list_sales(request):
         automobile = AutomobileVO.objects.get(vin=auto_vin)
         if automobile.sold is False:
             content["automobile"] = automobile
-
-            salesperson_id = content["salesperson"]
-            salesperson = Salesperson.objects.get(id=salesperson_id)
-            content["salesperson"] = salesperson
-
-
-            customer_id = content["customer"]
-            customer = Customer.objects.get(id=customer_id)
-            content["customer"] = customer
-
+            try:
+                salesperson_id = content["salesperson"]
+                salesperson = Salesperson.objects.get(id=salesperson_id)
+                content["salesperson"] = salesperson
+            except Salesperson.DoesNotExist:
+                return JsonResponse(
+                    {"message": "Invalid salesperson id"},
+                    status=404,
+                )
+            try:
+                customer_id = content["customer"]
+                customer = Customer.objects.get(id=customer_id)
+                content["customer"] = customer
+            except Customer.DoesNotExist:
+                return JsonResponse(
+                    {"message": "Customer does not exist"},
+                    status=404,
+                )
             automobile.sold =True
             automobile.save()
 
             sale = Sale.objects.create(**content)
             return JsonResponse(
-                                sale,
-                                encoder=SaleListEncoder,
-                                safe=False,
-                            )
+                    sale,
+                    encoder=SaleListEncoder,
+                    safe=False,
+                )
         else:
             response = JsonResponse(
                 {"message": "Car does not exist"}
