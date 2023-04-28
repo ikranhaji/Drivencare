@@ -48,6 +48,7 @@ function AppointmentList() {
             const data = await resp.json();
 
             setAppointments(appointments.filter(appointment => (appointment.id !== parseInt(id))))
+
         }
 
     };
@@ -79,7 +80,7 @@ function AppointmentList() {
                                     <td>{appointment.technician.first_name}</td>
                                     <td>{appointment.reason}</td>
                                     <td><button className="btn btn-danger" id= {appointment.id} onClick={handleCancelButton}>Canceled</button></td>
-                                    <td><button className="btn btn-danger" id= {appointment.id} onClick={handleFinishButton}>Finished</button></td>
+                                    <td><button className="btn btn-success" id= {appointment.id} onClick={handleFinishButton}>Finished</button></td>
                                 </tr>
                             );
                         })}
