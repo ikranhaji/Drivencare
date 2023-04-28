@@ -72,36 +72,3 @@ inventory vehicle is set to false by default so when a car appointment is made w
   "salesperson": 1
 
 }
-
-
-## Sales microservice
-There are four models that were used to create salespeople, customers, and sales.
-The Salesperson Model is being used in the views to create, list and delete salespeople
-The customer models is being used to create, list and delete customers
-The automobileVO model is grabbing automobile information from the inventory microservice using the poller in order to provide that information to sales microservice.
-The sales models has three foreignKey which grab infromation from the customer, salesperson and automobileVO model in order to be able to use that information to create sales since each sale needs to include a customer, salesperson, and car.
-
-Data for endpoints:
-To create a Salesperson:
-{
-	"first_name": "Test",
-	"last_name": "test",
-	"employee_id": 3
-}
-
-To create a customer :
-{
-	"first_name": "Test",
-	"last_name": "Test",
-	"address": "145788 Ln N",
-	"phone_number": "612-587-8978"
-}
-
-To create a sale:
-{
-	"customer": 2,
-	"price": 20000,
-	"salesperson": 2,
-	"automobile": "1C3CC5FB2AN120174"
-}
-Must use an existing Id of customer and salesperson(not Employee-Id but the Id values instead) and an existing VIN in Inventory Automobiles in order to successfully create a sale.
