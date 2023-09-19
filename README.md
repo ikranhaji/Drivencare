@@ -6,7 +6,11 @@ Docker: You must have Docker installed on your system. You can download Docker f
 ## Getting Started
 Clone this repository to your local machine
 - git clone https://github.com/ikranhaji/Drivencare.git
+
+Navigate to the project directory
 - cd drivencare
+
+Run this Docker Compose Command to set up and run the project
 - docker compose up
 
 Application should now be running and can be accessed on your web browser at http://localhost:3000/
