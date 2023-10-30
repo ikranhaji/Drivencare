@@ -83,7 +83,7 @@ function NewSale() {
         data.automobile = auto
 
 
-
+        let carvin = data.automobile
 
         const salesUrl = `http://localhost:8090/api/sales/`;
         const fetchConfig = {
@@ -99,6 +99,26 @@ function NewSale() {
 
         if (response.ok) {
             const newsale = await response.json();
+
+            let data = { "sold": "True" }
+
+            setAuto('');
+            setPerson('')
+            setCustomer('');
+            setPrice('');
+
+            const carUrl = `http://localhost:8100/api/automobiles/${carvin}/`;
+            const fetchConfig = {
+                method: "put",
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+
+            }
+            console.log(data)
+            const res = await fetch(carUrl, fetchConfig);
+            console.log(res)
 
 
             setAuto('');
