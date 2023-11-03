@@ -37,7 +37,7 @@ function ModelList() {
                                 <tr key={model.href}>
                                     <td>{model.name}</td>
                                     <td>{model.manufacturer.name}</td>
-                                    <td><img src={model.picture_url} /></td>
+                                    <td><img src={model.picture_url} class="img-fluid" alt="..." style={{ width: '16rem', height: '8.5rem' }} /></td>
                                 </tr>
 
                             );
