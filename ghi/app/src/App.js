@@ -1,24 +1,24 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import MainPage from './MainPage';
-import Nav from './Nav';
-import TechnicianForm from './TechnicianForm';
-import TechnicianList from './TechnicianList';
-import ManufacturerList from './ManufacturerList'
-import ManufacturerForm from './ManufacturerForm';
-import AppointmentForm from './AppointmentForm';
-import AppointmentList from './AppointmentList';
-import ServiceHistory from './ServiceHistory';
-import SalesPersonForm from './salesPersonForm';
-import SalesPeopleList from './salesPeopleList';
-import CustomerForm from './customerForm';
-import CustomerList from './customerList';
-import SaleList from './salesList';
-import SaleHistory from './salesHistory';
-import VehicleModelForm from './vehicleModelForm';
-import ModelList from './ModelList';
-import CarList from './CarList';
-import CarForm from './CarForm';
-import NewSale from './newSale';
+import MainPage from './Features/MainPage/MainPage';
+import Nav from './Features/Nav/Nav';
+import TechnicianForm from './Features/Technician/TechnicianForm';
+import TechnicianList from './Features/Technician/TechnicianList';
+import ManufacturerList from './Features/Manufacturer/ManufacturerList'
+import ManufacturerForm from './Features/Manufacturer/ManufacturerForm';
+import AppointmentForm from './Features/Appointments/AppointmentForm';
+import AppointmentList from './Features/Appointments/AppointmentList';
+import ServiceHistory from './Features/Service/ServiceHistory';
+import SalesPersonForm from './Features/Salespeople/salesPersonForm';
+import SalesPeopleList from './Features/Salespeople/salesPeopleList';
+import CustomerForm from './Features/Customers/customerForm';
+import CustomerList from './Features/Customers/customerList';
+import SaleList from './Features/Sales/salesList';
+import SaleHistory from './Features/Sales/salesHistory';
+import VehicleModelForm from './Features/Models/vehicleModelForm';
+import ModelList from './Features/Models/ModelList';
+import CarList from './Features/Automobiles/CarList';
+import CarForm from './Features/Automobiles/CarForm';
+import NewSale from './Features/Sales/newSale';
 
 
 

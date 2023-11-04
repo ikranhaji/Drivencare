@@ -1,5 +1,5 @@
-import mazda from "./images/mazda.png"
-import toyota from "./images/toyotarav4.jpeg"
+import mazda from "../../images/mazda.png"
+import toyota from "../../images/toyotarav4.jpeg"
 
 function Carousel() {
     return (
