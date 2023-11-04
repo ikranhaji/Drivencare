@@ -1,4 +1,4 @@
-import Carousel from "./carousel";
+import Carousel from "../Carousel/carousel";
 
 function MainPage() {
   return (
